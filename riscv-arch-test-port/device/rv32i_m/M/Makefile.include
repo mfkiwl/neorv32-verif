@@ -1,0 +1,4 @@
+NEORV32_MARCH ?= rv32im
+NEORV32_CPU_EXTENSION_RISCV_M ?= true
+
+include $(NEORV32_VERIF_ROOT)/riscv-arch-test/riscv-target/neorv32/common.mk
