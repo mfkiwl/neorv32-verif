@@ -106,4 +106,4 @@ for suite in $SUITES; do
   esac
 done
 
-printf "\nRISC-V architecture tests completed successfully"
+printf "\nRISC-V architecture tests completed successfully!\n"
