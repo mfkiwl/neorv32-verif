@@ -7,19 +7,23 @@ cd $(dirname "$0")
 
 header() {
   echo "--------------------------------------------------------------------------"
-  echo "> $@..."
+  echo "> $@"
   echo "--------------------------------------------------------------------------"
 }
 
 RISCV_PREFIX="${RISCV_PREFIX:-riscv32-unknown-elf-}"
 
-header "Checking RISC-V GCC toolchain"
+header "Checking RISC-V GCC toolchain..."
 "$RISCV_PREFIX"gcc -v
 
-header "Checking submodules"
+header "NEORV32 Processor Version"
+grep -rni 'neorv32/rtl/core/neorv32_package.vhd' -e 'hw_version_c'
+sleep 2
+
+header "Checking submodules..."
 git submodule update --init
 
-header "Copying neorv32-specific test-target port into riscv-arch-test framework"
+header "Copying neorv32-specific test-target port into riscv-arch-test framework..."
 (
   target_device='riscv-arch-test/riscv-target/neorv32'
   if [ -d "$target_device" ]; then rm -rf "$target_device"; fi
@@ -28,7 +32,7 @@ header "Copying neorv32-specific test-target port into riscv-arch-test framework
   cp -f riscv-arch-test-port/riscv-test-suite/rv32i_m/privilege/references/* riscv-arch-test/riscv-test-suite/rv32i_m/privilege/references 
 )
 
-header "Making local copy of NEORV32 'rtl' and 'sim' folders"
+header "Making local copy of NEORV32 'rtl' and 'sim' folders..."
 
 export NEORV32_LOCAL_RTL=${NEORV32_LOCAL_RTL:-$(pwd)/neorv32/sim/work}
 
@@ -36,7 +40,7 @@ rm -rf "$NEORV32_LOCAL_RTL"
 cp -r neorv32/rtl "$NEORV32_LOCAL_RTL"
 rm -f $NEORV32_LOCAL_RTL/core/mem/*.legacy.vhd
 
-header "Starting RISC-V architecture tests"
+header "Starting RISC-V architecture tests..."
 
 ./neorv32/sim/simple/ghdl.setup.sh
 
@@ -106,4 +110,4 @@ for suite in $SUITES; do
   esac
 done
 
-printf "\nRISC-V architecture tests completed successfully!\n"
+header "RISC-V architecture tests completed!"
