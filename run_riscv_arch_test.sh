@@ -16,12 +16,12 @@ RISCV_PREFIX="${RISCV_PREFIX:-riscv32-unknown-elf-}"
 header "Checking RISC-V GCC toolchain..."
 "$RISCV_PREFIX"gcc -v
 
+header "Checking submodules..."
+git submodule update --init
+
 header "NEORV32 Processor Version"
 grep -rni 'neorv32/rtl/core/neorv32_package.vhd' -e 'hw_version_c'
 sleep 2
-
-header "Checking submodules..."
-git submodule update --init
 
 header "Copying neorv32-specific test-target port into riscv-arch-test framework..."
 (
