@@ -46,7 +46,7 @@ header "Starting RISC-V architecture tests..."
 
 # work in progress FIXME
 printf "\n"
-printf "\e[1;33m[WARNING] 'I/jal-01' test is currently disabled (GHDL simulation issue)! \e[0m\n"
+printf "\e[1;33m[WARNING] 'I/jal-01' test is currently disabled (Github Actions GHDL simulation issue)! \e[0m\n"
 printf "\e[1;33m[WARNING] Overwriting default 'C/cebreak' and 'privilege/ebreak' test references! \e[0m\n"
 printf "\n"
 sleep 2
@@ -99,7 +99,7 @@ for suite in $SUITES; do
        make --silent $makeArgs SIM_TIME=600us RISCV_DEVICE=I RISCV_TEST='xori-01' run;
        make --silent $makeArgs SIM_TIME=200us RISCV_DEVICE=I RISCV_TEST='fence-01' run;
        make --silent $makeArgs SIM_TIME=200us RISCV_DEVICE=I RISCV_TEST='fence-01' verify;;
-    C) make --silent $makeArgs SIM_TIME=400us RISCV_DEVICE=C $makeTargets;;
+    C) make --silent $makeArgs SIM_TIME=500us RISCV_DEVICE=C $makeTargets;;
     M) make --silent $makeArgs SIM_TIME=800us RISCV_DEVICE=M $makeTargets;;
     privilege) make --silent $makeArgs SIM_TIME=200us RISCV_DEVICE=privilege $makeTargets;;
     Zifencei) make --silent $makeArgs SIM_TIME=200us RISCV_DEVICE=Zifencei RISCV_TARGET_FLAGS=-DNEORV32_NO_DATA_INIT $makeTargets;;
