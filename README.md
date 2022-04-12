@@ -56,6 +56,9 @@ For each test suite (like `rv32i_m/C`) the following steps are executed by the d
 :warning: The default RISC-V architecture tests will be superseded by the RISCOF test framework.
 I am planning to make a port for this new test framework.
 
+:warning: The `I/jal` test is currently disabled by default due to a GHDL simulation issue that
+only seems to occur when running as GitHub Actions Workflow.
+
 :warning: Simulating all the test cases takes quite some time. Some tests use an optimized description
 of IMEM (`neorv32_imem.simple.vhd`), but others require the original because they execute self-modifying code.
 
