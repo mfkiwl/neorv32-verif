@@ -51,6 +51,8 @@ RUN_TARGET ?= \
 	cp -f $(NEORV32_ROOT)/sim/simple/neorv32_imem.simple.vhd $(NEORV32_LOCAL_RTL)/core/mem/neorv32_imem.default.vhd;
 endif
 
+#	fixme - timekeeping: GHDL_DEVNULL=true $(shell which time) -v $(NEORV32_ROOT)/sim/simple/ghdl.run.sh \
+
 RUN_TARGET += \
 	cd $(work_dir_isa); \
 	echo ">"; \
@@ -59,7 +61,7 @@ RUN_TARGET += \
 	cp -f $< $(NEORV32_SOFTWARE_EXAMPLE)/main.elf; \
 	make -C $(NEORV32_SOFTWARE_EXAMPLE) main.bin install; \
 	touch $(NEORV32_ROOT)/sim/simple/neorv32.uart0.sim_mode.data.out; \
-	GHDL_DEVNULL=true $(shell which time) -v $(NEORV32_ROOT)/sim/simple/ghdl.run.sh \
+	GHDL_DEVNULL=true sh $(NEORV32_ROOT)/sim/simple/ghdl.run.sh \
 	  --stop-time=$(SIM_TIME) \
 	  -gCPU_EXTENSION_RISCV_A=false \
 	  -gCPU_EXTENSION_RISCV_C=$(NEORV32_CPU_EXTENSION_RISCV_C) \
